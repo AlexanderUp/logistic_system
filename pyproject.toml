@@ -1,0 +1,39 @@
+[tool.black]
+skip-string-normalization=true
+skip-magic-trailing-comma=false
+line-length=89
+
+[tool.flake8]
+ignore=['WPS100', 'WPS226', 'WPS305', 'WPS348', 'W503', 'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D106']
+per-file-ignores = [
+    'settings.py:WPS407',
+    'urls.py:F401,WPS433',
+    'models.py: WPS306',
+    'filters.py: WPS306',
+    'serializers.py: WPS110,WPS615,WPS306',
+    'test_*.py:S101',
+    'conftest.py:WPS442',
+]
+exclude=['migrations/', 'manage.py']
+max-cognitive-complexity=10
+max-line-length=89
+class_attributes_order=['field', 'meta_class', 'nested_class', 'magic_method', 'property_method', 'static_method', 'class_method', 'method', 'private_method']
+
+[tool.isort]
+known_first_party=[]
+profile='black'
+
+[tool.mypy]
+exclude=['migrations']
+ignore_missing_imports=true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "logistic_system.settings"
+filterwarnings = [
+    'ignore::DeprecationWarning'
+]
+python_paths = '.'
+norecursedirs = ['venv/*']
+addopts = '-vv -p no:cacheprovider'
+testpaths = ['tests/']
+python_files = ['test_*.py']
