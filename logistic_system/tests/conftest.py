@@ -4,10 +4,10 @@ from locations.models import City, State
 
 
 @pytest.fixture()
-def state():
-    return State.objects.create(name='Alaska')
+def state(faker):
+    return State.objects.create(name=faker.word())
 
 
 @pytest.fixture()
-def city(state):
-    return City.objects.create(name='Anchorage', state=state)
+def city(faker, state):
+    return City.objects.create(name=faker.word(), state=state)

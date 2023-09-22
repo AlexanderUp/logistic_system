@@ -20,7 +20,6 @@ pytestmark = pytest.mark.django_db
 def test_coordinates_out_of_limit(state, city, latitude, longitude):
     with pytest.raises(IntegrityError):
         assert Location.objects.create(
-            state=state,
             city=city,
             zip_code='123456',
             latitude=latitude,
@@ -42,7 +41,6 @@ def test_coordinates_out_of_limit(state, city, latitude, longitude):
 )
 def test_coordinates_exact_limit(state, city, latitude, longitude):
     assert Location.objects.create(
-        state=state,
         city=city,
         zip_code='123456',
         latitude=latitude,

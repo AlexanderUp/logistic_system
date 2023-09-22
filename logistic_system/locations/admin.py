@@ -14,7 +14,8 @@ class CityAdmin(admin.ModelAdmin):
 
 
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'state', 'city', 'zip_code', 'latitude', 'longitude')
+    list_display = ('pk', 'city', 'zip_code', 'latitude', 'longitude')
+    search_fields = ('city__name', 'zip_code')
     empty_value_display = '--empty--'
 
 

@@ -21,7 +21,7 @@ max-line-length=89
 class_attributes_order=['field', 'meta_class', 'nested_class', 'magic_method', 'property_method', 'static_method', 'class_method', 'method', 'private_method']
 
 [tool.isort]
-known_first_party=['locations', 'vehicles']
+known_first_party=['cargo', 'locations', 'vehicles']
 profile='black'
 
 [tool.mypy]

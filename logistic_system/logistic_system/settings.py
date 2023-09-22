@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'locations.apps.LocationsConfig',
     'vehicles.apps.VehiclesConfig',
+    'cargo.apps.CargoConfig',
 ]
 
 MIDDLEWARE = [

@@ -55,17 +55,10 @@ class City(models.Model):
         )
 
     def __str__(self):
-        return f'City <{self.name}>'
+        return 'City <{0} ({1})>'.format(self.name, self.state.name)
 
 
 class Location(models.Model):
-    state = models.ForeignKey(
-        State,
-        on_delete=models.CASCADE,
-        related_name='locations',
-        verbose_name='state',
-        help_text='State where location placed',
-    )
     city = models.ForeignKey(
         City,
         on_delete=models.CASCADE,
@@ -110,4 +103,8 @@ class Location(models.Model):
         )
 
     def __str__(self):
-        return f'Location <{self.zip_code}>'
+        return 'Location <{0} ({1}, {2})>'.format(
+            self.zip_code,
+            self.city.name,
+            self.city.state.name,
+        )
