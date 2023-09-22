@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'locations.apps.LocationsConfig',
+    'vehicles.apps.VehiclesConfig',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +117,8 @@ if LOGGING_ENABLED:
             },
         },
     }
+
+# project related settings
+VEHICLE_CODE_DIGITS_LOWER_BOUND: int = 1000
+VEHICLE_CODE_DIGITS_UPPER_BOUND: int = 9999
+VEHICLE_CODE_LETTER_COUNT: int = 1

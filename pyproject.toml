@@ -13,6 +13,7 @@ per-file-ignores = [
     'serializers.py: WPS110,WPS615,WPS306',
     'test_*.py:S101',
     'conftest.py:WPS442',
+    'logistic_system/vehicles/utils.py:S311',
 ]
 exclude=['*/migrations/*.py', 'manage.py']
 max-cognitive-complexity=10
@@ -20,7 +21,7 @@ max-line-length=89
 class_attributes_order=['field', 'meta_class', 'nested_class', 'magic_method', 'property_method', 'static_method', 'class_method', 'method', 'private_method']
 
 [tool.isort]
-known_first_party=['locations']
+known_first_party=['locations', 'vehicles']
 profile='black'
 
 [tool.mypy]
