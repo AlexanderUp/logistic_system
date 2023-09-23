@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'locations.apps.LocationsConfig',
     'vehicles.apps.VehiclesConfig',
     'cargo.apps.CargoConfig',
+    'tracks.apps.TracksConfig',
 ]
 
 MIDDLEWARE = [
