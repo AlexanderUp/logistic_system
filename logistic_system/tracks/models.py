@@ -21,7 +21,7 @@ class Track(models.Model):
         help_text='Vehicle',
     )
     created_at = models.DateTimeField(
-        default=timezone.now(),
+        default=timezone.now,
         verbose_name='created_at',
         help_text='Track created at',
     )

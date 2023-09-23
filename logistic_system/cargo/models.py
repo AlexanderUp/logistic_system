@@ -2,6 +2,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from locations.models import Location
+from vehicles.models import Vehicle
 
 
 class Cargo(models.Model):
@@ -28,6 +29,15 @@ class Cargo(models.Model):
         max_length=1000,
         verbose_name='description',
         help_text='Cargo description',
+    )
+    vehicle = models.ForeignKey(
+        Vehicle,
+        on_delete=models.CASCADE,
+        related_name='cargoes',
+        blank=True,
+        null=True,
+        verbose_name='vehicle',
+        help_text='Transporting vehicle',
     )
 
     class Meta:
