@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from locations.models import Location
 from vehicles.models import Vehicle
@@ -19,11 +20,16 @@ class Track(models.Model):
         verbose_name='vehicle',
         help_text='Vehicle',
     )
+    created_at = models.DateTimeField(
+        default=timezone.now(),
+        verbose_name='created_at',
+        help_text='Track created at',
+    )
 
     class Meta:
         verbose_name = 'Track'
         verbose_name_plural = 'Tracks'
-        ordering = ('-pk',)
+        ordering = ('-created_at',)
 
     def __str__(self):
         return 'Track <{0} - {1}>'.format(self.location, self.vehicle)
