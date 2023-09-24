@@ -22,10 +22,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'rest_framework',
     'locations.apps.LocationsConfig',
     'vehicles.apps.VehiclesConfig',
     'cargo.apps.CargoConfig',
     'tracks.apps.TracksConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +126,5 @@ if LOGGING_ENABLED:
 VEHICLE_CODE_DIGITS_LOWER_BOUND: int = 1000
 VEHICLE_CODE_DIGITS_UPPER_BOUND: int = 9999
 VEHICLE_CODE_LETTER_COUNT: int = 1
+
+CLOSEST_VEHICLE_RANGE_IN_MILES: int = 450

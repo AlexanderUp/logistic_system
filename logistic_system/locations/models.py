@@ -108,3 +108,7 @@ class Location(models.Model):
             self.city.name,
             self.city.state.name,
         )
+
+    @property
+    def coordinates(self) -> tuple:
+        return (self.latitude, self.longitude)

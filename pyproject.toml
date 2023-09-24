@@ -4,7 +4,7 @@ skip-magic-trailing-comma=false
 line-length=89
 
 [tool.flake8]
-ignore=['WPS100', 'WPS226', 'WPS305', 'WPS317', 'WPS348', 'W503', 'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D106', 'S311']
+ignore=['WPS100', 'WPS226', 'WPS305', 'WPS317', 'WPS348', 'W503', 'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D106', 'S311', 'DAR101']
 per-file-ignores = [
     'settings.py:WPS407',
     'urls.py:F401,WPS433',
@@ -21,7 +21,7 @@ max-line-length=89
 class_attributes_order=['field', 'meta_class', 'nested_class', 'magic_method', 'property_method', 'static_method', 'class_method', 'method', 'private_method']
 
 [tool.isort]
-known_first_party=['cargo', 'locations', 'vehicles', 'tracks']
+known_first_party=['api', 'cargo', 'locations', 'tracks', 'vehicles']
 profile='black'
 
 [tool.mypy]
