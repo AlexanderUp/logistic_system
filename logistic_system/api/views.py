@@ -1,15 +1,13 @@
 from django.db.models import OuterRef, Subquery
 from rest_framework import viewsets
 
-from api.serializers import CargoSerializer
+from api.serializers import CargoDetailSerializer, CargoListSerializer
 from cargo.models import Cargo
 from tracks.models import Track
 from vehicles.models import Vehicle
 
 
 class CargoViewSet(viewsets.ModelViewSet):
-    serializer_class = CargoSerializer
-
     def get_queryset(self):
         return Cargo.objects.select_related(
             'pickup_location',
@@ -34,3 +32,8 @@ class CargoViewSet(viewsets.ModelViewSet):
         )
         context['vehicles_qs'] = vehicles_qs
         return context
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return CargoDetailSerializer
+        return CargoListSerializer
