@@ -1,10 +1,11 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from api.views import CargoViewSet
+from api.views import CargoViewSet, VehicleViewSet
 
 v1_router = DefaultRouter()
 v1_router.register('cargoes', CargoViewSet, basename='cargo')
+v1_router.register('vehicles', VehicleViewSet, basename='vehicle')
 
 app_name = 'api'
 
