@@ -8,13 +8,13 @@ ignore=['WPS100', 'WPS226', 'WPS305', 'WPS317', 'WPS348', 'W503', 'D100', 'D101'
 per-file-ignores = [
     'settings.py:WPS407',
     'urls.py:F401,WPS433',
-    'models.py: WPS306',
-    'filters.py: WPS306',
-    'serializers.py: WPS110,WPS615,WPS306',
+    'models.py:WPS306',
+    'filters.py:WPS306',
+    'serializers.py:WPS110,WPS202,WPS615,WPS306',
     'test_*.py:S101',
     'conftest.py:WPS442',
     '*/commands/*.py:WPS110',
-    'logistic_system/api/views.py:I001,I005',
+    'logistic_system/api/views.py:CFQ004,I001,I005',
 ]
 exclude=['*/migrations/*.py', 'manage.py']
 max-cognitive-complexity=10

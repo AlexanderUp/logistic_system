@@ -31,7 +31,25 @@ class VehicleSerializer(VehicleBaseSerializer):
         return obj.current_location
 
 
+class VehicleDistanceSerializer(VehicleBaseSerializer):
+    distance_to = serializers.SerializerMethodField()
+
+    class Meta(VehicleBaseSerializer.Meta):
+        fields = VehicleBaseSerializer.Meta.fields + [
+            'distance_to',
+        ]
+
+    def get_distance_to(self, obj):
+        return obj.distance_to
+
+
 class CargoBaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cargo
+        fields = ['pk', 'weight', 'description']
+
+
+class CargoSerializer(CargoBaseSerializer):
     pickup_location = serializers.SlugRelatedField(
         slug_field='zip_code',
         queryset=Location.objects.select_related('city', 'city__state'),
@@ -40,39 +58,29 @@ class CargoBaseSerializer(serializers.ModelSerializer):
         slug_field='zip_code',
         queryset=Location.objects.select_related('city', 'city__state'),
     )
-    vehicle_assigned = serializers.SlugRelatedField(
+    vehicle = serializers.SlugRelatedField(
         slug_field='code',
         queryset=Vehicle.objects.all(),
-        allow_null=True,
-        default=None,
     )
 
-    class Meta:
-        model = Cargo
-        fields = [
-            'pk',
-            'weight',
+    class Meta(CargoBaseSerializer.Meta):
+        fields = CargoBaseSerializer.Meta.fields + [
             'pickup_location',
             'delivery_location',
-            'description',
-            'vehicle_assigned',
+            'vehicle',
         ]
 
     def validate(self, data):
         if data['pickup_location'] == data['delivery_location']:
             raise serializers.ValidationError('Delivery to same location prohibited!')
-
-        vehicle_assigned = data.pop('vehicle_assigned')
-        data['vehicle'] = vehicle_assigned
         return data
 
 
-class CargoListSerializer(CargoBaseSerializer):
+class CargoListSerializer(CargoSerializer):
     closest_vehicles_count = serializers.SerializerMethodField()
 
-    class Meta(CargoBaseSerializer.Meta):
-        model = Cargo
-        fields = CargoBaseSerializer.Meta.fields + [
+    class Meta(CargoSerializer.Meta):
+        fields = CargoSerializer.Meta.fields + [
             'closest_vehicles_count',
         ]
 
@@ -91,23 +99,11 @@ class CargoListSerializer(CargoBaseSerializer):
         )
 
 
-class VehicleDistanceSerializer(VehicleBaseSerializer):
-    distance_to = serializers.SerializerMethodField()
-
-    class Meta(VehicleBaseSerializer.Meta):
-        fields = VehicleBaseSerializer.Meta.fields + [
-            'distance_to',
-        ]
-
-    def get_distance_to(self, obj):
-        return obj.distance_to
-
-
-class CargoDetailSerializer(CargoBaseSerializer):
+class CargoDetailSerializer(CargoSerializer):
     vehicles = serializers.SerializerMethodField()
 
-    class Meta(CargoBaseSerializer.Meta):
-        fields = CargoBaseSerializer.Meta.fields + [
+    class Meta(CargoSerializer.Meta):
+        fields = CargoSerializer.Meta.fields + [
             'vehicles',
         ]
 

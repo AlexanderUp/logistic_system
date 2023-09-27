@@ -2,8 +2,10 @@ from django.db.models import OuterRef, Subquery
 from rest_framework import viewsets
 
 from api.serializers import (
+    CargoBaseSerializer,
     CargoDetailSerializer,
     CargoListSerializer,
+    CargoSerializer,
     TrackSerializer,
     VehicleSerializer,
 )
@@ -17,6 +19,7 @@ class CargoViewSet(viewsets.ModelViewSet):
         return Cargo.objects.select_related(
             'pickup_location',
             'delivery_location',
+            'vehicle',
         )
 
     def get_serializer_context(self):
@@ -30,8 +33,12 @@ class CargoViewSet(viewsets.ModelViewSet):
         return context
 
     def get_serializer_class(self):
+        if self.action == 'create':
+            return CargoSerializer
         if self.action == 'retrieve':
             return CargoDetailSerializer
+        if self.action == 'partial_update':
+            return CargoBaseSerializer
         return CargoListSerializer
 
 
