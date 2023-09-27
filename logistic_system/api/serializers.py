@@ -5,6 +5,7 @@ from rest_framework import serializers
 from api.utils import annotate_vehicle_with_distance
 from cargo.models import Cargo
 from locations.models import Location
+from tracks.models import Track
 from vehicles.models import Vehicle
 
 
@@ -127,3 +128,26 @@ class CargoDetailSerializer(CargoBaseSerializer):
             for vehicle, distance_to in vehicle_distances
         ]
         return VehicleDistanceSerializer(vehicles, many=True).data
+
+
+class TrackSerializer(serializers.ModelSerializer):
+    vehicle = serializers.SlugRelatedField(
+        slug_field='code',
+        queryset=Vehicle.objects.all(),
+    )
+    location = serializers.SlugRelatedField(
+        slug_field='zip_code',
+        queryset=Location.objects.select_related('city__state'),
+    )
+
+    class Meta:
+        model = Track
+        fields = ('vehicle', 'location')
+
+    def create(self, validated_data):
+        vehicle = validated_data['vehicle']
+        location = validated_data['location']
+        track, _ = Track.objects.get_or_create(vehicle=vehicle)
+        track.location = location
+        track.save()
+        return track

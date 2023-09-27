@@ -1,7 +1,12 @@
 from django.db.models import OuterRef, Subquery
 from rest_framework import viewsets
 
-from api.serializers import CargoDetailSerializer, CargoListSerializer, VehicleSerializer
+from api.serializers import (
+    CargoDetailSerializer,
+    CargoListSerializer,
+    TrackSerializer,
+    VehicleSerializer,
+)
 from cargo.models import Cargo
 from tracks.models import Track
 from vehicles.models import Vehicle
@@ -38,3 +43,8 @@ class VehicleViewSet(viewsets.ModelViewSet):
         return Vehicle.objects.annotate(
             current_location=Subquery(track_qs.values('location__zip_code')[:1]),
         )
+
+
+class TrackViewset(viewsets.ModelViewSet):
+    serializer_class = TrackSerializer
+    queryset = Track.objects.select_related('location', 'vehicle')
