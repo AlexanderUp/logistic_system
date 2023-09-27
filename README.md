@@ -7,7 +7,7 @@
 
 - Clone repo
 
-```git clone git@github.com:AlexanderUp/.git```
+```git clone git@github.com:AlexanderUp/logistic_system.git```
 
 - Create virtual environment
 
