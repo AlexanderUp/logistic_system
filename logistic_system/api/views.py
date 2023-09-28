@@ -1,6 +1,8 @@
 from django.db.models import OuterRef, Subquery
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
+from api.filters import CargoFilter
 from api.serializers import (
     CargoBaseSerializer,
     CargoDetailSerializer,
@@ -15,6 +17,9 @@ from vehicles.models import Vehicle
 
 
 class CargoViewSet(viewsets.ModelViewSet):
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = CargoFilter
+
     def get_queryset(self):
         return Cargo.objects.select_related(
             'pickup_location',
