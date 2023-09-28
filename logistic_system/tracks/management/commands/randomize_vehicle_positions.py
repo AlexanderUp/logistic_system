@@ -14,6 +14,8 @@ class Command(BaseCommand):
         vehicles = Vehicle.objects.all()
 
         with transaction.atomic():
+            Track.objects.all().delete()
+
             tracks = []
             for vehicle in vehicles:
                 tracks.append(
