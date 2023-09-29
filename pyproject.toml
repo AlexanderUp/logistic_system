@@ -15,6 +15,7 @@ per-file-ignores = [
     'conftest.py:WPS442',
     '*/commands/*.py:WPS110',
     'logistic_system/api/views.py:CFQ004,I001,I005',
+    'logistic_system/logistic_system/__init__.py:WPS300,WPS410,WPS412',
 ]
 exclude=['*/migrations/*.py', 'manage.py']
 max-cognitive-complexity=10

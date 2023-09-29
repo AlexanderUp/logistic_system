@@ -123,6 +123,10 @@ if LOGGING_ENABLED:
         },
     }
 
+# Celery related settings
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER', 'amqp://localhost:5672/')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_BROKER', 'rpc://localhost:5672/')
+
 # project related settings
 VEHICLE_CODE_DIGITS_LOWER_BOUND: int = 1000
 VEHICLE_CODE_DIGITS_UPPER_BOUND: int = 9999
