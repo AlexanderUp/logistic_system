@@ -1,29 +1,11 @@
-import random
-
 from django.core.management.base import BaseCommand
-from django.db import transaction
 
-from locations.models import Location
-from tracks.models import Track
-from vehicles.models import Vehicle
+from tracks.utils import randomize_vehicle_positions
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        locations = Location.objects.all()
-        vehicles = Vehicle.objects.all()
-
-        with transaction.atomic():
-            tracks = []
-            for vehicle in vehicles:
-                tracks.append(
-                    Track(
-                        vehicle=vehicle,
-                        location=random.choice(locations),
-                    ),
-                )
-
-            tracks_created = Track.objects.bulk_create(tracks)
+        tracks_created = randomize_vehicle_positions()
 
         self.stdout.write(
             self.style.SUCCESS(
