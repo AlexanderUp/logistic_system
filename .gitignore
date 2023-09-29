@@ -177,3 +177,6 @@ media/
 .local
 .aws
 .azure
+
+# Celery beat
+celerybeat-schedule.db
